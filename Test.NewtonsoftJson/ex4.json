@@ -1,0 +1,5 @@
+{
+	"Left": "Amount",
+	"Operator": "GreaterThan",
+	"Right": 100.01
+}

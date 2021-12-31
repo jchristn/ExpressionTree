@@ -1,0 +1,9 @@
+{
+	"Left": "NameOnCard",
+	"Operator": "In",
+	"Right": [
+		"Smith",
+		"Jones",
+		"Davidson"
+	]
+}

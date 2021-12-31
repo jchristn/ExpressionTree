@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;netcoreapp3.1;net461;net5.0;net6.0</TargetFrameworks>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Joel Christner</Authors>
+    <Description>A simple library for creating an expression tree.</Description>
+    <Copyright>(c)2022 Joel Christner</Copyright>
+    <PackageProjectUrl>https://github.com/jchristn/ExpressionTree</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/jchristn/ExpressionTree</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>expression tree</PackageTags>
+    <PackageLicenseFile></PackageLicenseFile>
+    <DocumentationFile>ExpressionTree.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\icon.png" />
+    <None Remove="ExpressionTree.xml" />
+    <None Remove="LICENSE.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
+    <Content Include="ExpressionTree.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="LICENSE.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

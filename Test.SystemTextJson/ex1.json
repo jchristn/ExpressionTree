@@ -1,0 +1,13 @@
+{
+	"Left": {
+		"Left": "Brand",
+		"Operator": "Equals",
+		"Right": "Visa"
+	},
+	"Operator": "Or", 
+	"Right": {
+		"Left": "Brand",
+		"Operator": "Equals",
+		"Right": "Mastercard"
+	}
+}

@@ -1,0 +1,21 @@
+{
+	"Left": {
+		"Left": "Amount",
+		"Operator": "GreaterThan",
+		"Right": 100.00
+	},
+	"Operator": "And",
+	"Right": {
+		"Left": {
+			"Left": "Brand",
+			"Operator": "Equals",
+			"Right": "Visa"
+		},
+		"Operator": "Or", 
+		"Right": {
+			"Left": "Brand",
+			"Operator": "Equals",
+			"Right": "Mastercard"
+		}
+	}
+}
