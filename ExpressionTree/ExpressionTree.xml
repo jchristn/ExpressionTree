@@ -53,11 +53,76 @@
             <param name="oper">The operator.</param>
             <param name="right">The right term of the expression.</param>
         </member>
+        <member name="M:ExpressionTree.Expr.Between(System.Object,System.Collections.Generic.List{System.Object})">
+            <summary>
+            An expression that allows you to determine if an object is between two values, i.e. GreaterThanOrEqualTo the first value, and LessThanOrEqualTo the second value.
+            </summary>
+            <param name="left">The left term of the expression; can either be a string term or a nested expression.</param> 
+            <param name="right">List of two values where the first value is the lower value and the second value is the higher value.</param>
+        </member>
         <member name="M:ExpressionTree.Expr.ToString">
             <summary>
             String representation.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:ExpressionTree.Expr.PrependAnd(System.Object,ExpressionTree.OperatorEnum,System.Object)">
+            <summary>
+            Prepends a new expression using the supplied left term, operator, and right term using an AND clause.
+            </summary>
+            <param name="left">The left term of the expression; can either be a string term or a nested expression.</param>
+            <param name="oper">The operator.</param>
+            <param name="right">The right term of the expression; can either be an object for comparison or a nested expression.</param>
+        </member>
+        <member name="M:ExpressionTree.Expr.PrependAnd(ExpressionTree.Expr)">
+            <summary>
+            Prepends the expression with the supplied expression using an AND clause.
+            </summary>
+            <param name="prepend">The expression to prepend.</param> 
+        </member>
+        <member name="M:ExpressionTree.Expr.PrependOr(System.Object,ExpressionTree.OperatorEnum,System.Object)">
+            <summary>
+            Prepends a new expression using the supplied left term, operator, and right term using an OR clause.
+            </summary>
+            <param name="left">The left term of the expression; can either be a string term or a nested expression.</param>
+            <param name="oper">The operator.</param>
+            <param name="right">The right term of the expression; can either be an object for comparison or a nested expression.</param>
+        </member>
+        <member name="M:ExpressionTree.Expr.PrependOr(ExpressionTree.Expr)">
+            <summary>
+            Prepends the expression with the supplied expression using an OR clause.
+            </summary>
+            <param name="prepend">The expression to prepend.</param> 
+        </member>
+        <member name="M:ExpressionTree.Expr.PrependAndClause(ExpressionTree.Expr,ExpressionTree.Expr)">
+            <summary>
+            Prepends the expression in prepend to the expression original using an AND clause.
+            </summary>
+            <param name="prepend">The expression to prepend.</param>
+            <param name="original">The original expression.</param>
+            <returns>A new expression.</returns>
+        </member>
+        <member name="M:ExpressionTree.Expr.PrependOrClause(ExpressionTree.Expr,ExpressionTree.Expr)">
+            <summary>
+            Prepends the expression in prepend to the expression original using an OR clause.
+            </summary>
+            <param name="prepend">The expression to prepend.</param>
+            <param name="original">The original expression.</param>
+            <returns>A new expression.</returns>
+        </member>
+        <member name="M:ExpressionTree.Expr.ListToNestedAndExpression(System.Collections.Generic.List{ExpressionTree.Expr})">
+            <summary>
+            Convert a list of expression objects to a nested expression containing AND between each expression in the list. 
+            </summary>
+            <param name="exprList">List of expression objects.</param>
+            <returns>A nested expression.</returns>
+        </member>
+        <member name="M:ExpressionTree.Expr.ListToNestedOrExpression(System.Collections.Generic.List{ExpressionTree.Expr})">
+            <summary>
+            Convert a list of expression objects to a nested expression containing OR between each expression in the list. 
+            </summary>
+            <param name="exprList">List of expression objects.</param>
+            <returns>A nested expression.</returns>
         </member>
         <member name="T:ExpressionTree.OperatorEnum">
             <summary>
