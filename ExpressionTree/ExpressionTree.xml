@@ -119,9 +119,19 @@
             The left term starts with the right term.
             </summary>
         </member>
+        <member name="F:ExpressionTree.OperatorEnum.StartsWithNot">
+            <summary>
+            The left term does not start with the right term.
+            </summary>
+        </member>
         <member name="F:ExpressionTree.OperatorEnum.EndsWith">
             <summary>
             The left term ends with the right term.
+            </summary>
+        </member>
+        <member name="F:ExpressionTree.OperatorEnum.EndsWithNot">
+            <summary>
+            The left term does not end with the right term.
             </summary>
         </member>
         <member name="F:ExpressionTree.OperatorEnum.And">

@@ -66,10 +66,20 @@ namespace ExpressionTree
         [EnumMember(Value = "StartsWith")]
         StartsWith,
         /// <summary>
+        /// The left term does not start with the right term.
+        /// </summary>
+        [EnumMember(Value = "StartsWithNot")]
+        StartsWithNot,
+        /// <summary>
         /// The left term ends with the right term.
         /// </summary>
         [EnumMember(Value = "EndsWith")]
         EndsWith,
+        /// <summary>
+        /// The left term does not end with the right term.
+        /// </summary>
+        [EnumMember(Value = "EndsWithNot")]
+        EndsWithNot,
         /// <summary>
         /// The left and right both resolve to true.
         /// </summary>
