@@ -58,6 +58,18 @@ namespace Test.NewtonsoftJson
             Expr ex6 = SerializationHelper.DeserializeJson<Expr>(ex6str);
             Console.WriteLine(ex6.ToString());
             Console.WriteLine("");
+
+            string userInput = null;
+            while (true)
+            {
+                Console.Write("JSON [null to exit]: ");
+                userInput = Console.ReadLine();
+                if (String.IsNullOrEmpty(userInput)) break;
+
+                Expr ex = SerializationHelper.DeserializeJson<Expr>(userInput);
+                Console.WriteLine(ex.ToString());
+                Console.WriteLine("");
+            }
         }
     }
 }
