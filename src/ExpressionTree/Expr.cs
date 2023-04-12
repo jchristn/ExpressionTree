@@ -150,17 +150,17 @@ namespace ExpressionTree
         /// <param name="left">The left term of the expression; can either be a string term or a nested expression.</param>
         /// <param name="oper">The operator.</param>
         /// <param name="right">The right term of the expression; can either be an object for comparison or a nested expression.</param>
-        public void PrependAnd(object left, OperatorEnum oper, object right)
+        public Expr PrependAnd(object left, OperatorEnum oper, object right)
         {
             Expr e = new Expr(left, oper, right);
-            PrependAnd(e);
+            return PrependAnd(e);
         }
 
         /// <summary>
         /// Prepends the expression with the supplied expression using an AND clause.
         /// </summary>
         /// <param name="prepend">The expression to prepend.</param> 
-        public void PrependAnd(Expr prepend)
+        public Expr PrependAnd(Expr prepend)
         {
             if (prepend == null) throw new ArgumentNullException(nameof(prepend));
 
@@ -169,6 +169,8 @@ namespace ExpressionTree
             Left = e.Left;
             Operator = e.Operator;
             Right = e.Right;
+
+            return this;
         }
 
         /// <summary>
@@ -177,17 +179,17 @@ namespace ExpressionTree
         /// <param name="left">The left term of the expression; can either be a string term or a nested expression.</param>
         /// <param name="oper">The operator.</param>
         /// <param name="right">The right term of the expression; can either be an object for comparison or a nested expression.</param>
-        public void PrependOr(object left, OperatorEnum oper, object right)
+        public Expr PrependOr(object left, OperatorEnum oper, object right)
         {
             Expr e = new Expr(left, oper, right);
-            PrependOr(e);
+            return PrependOr(e);
         }
 
         /// <summary>
         /// Prepends the expression with the supplied expression using an OR clause.
         /// </summary>
         /// <param name="prepend">The expression to prepend.</param> 
-        public void PrependOr(Expr prepend)
+        public Expr PrependOr(Expr prepend)
         {
             if (prepend == null) throw new ArgumentNullException(nameof(prepend));
 
@@ -197,7 +199,7 @@ namespace ExpressionTree
             Operator = e.Operator;
             Right = e.Right;
 
-            return;
+            return this;
         }
 
         /// <summary>

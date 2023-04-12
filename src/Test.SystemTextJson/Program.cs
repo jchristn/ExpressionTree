@@ -58,6 +58,15 @@ namespace Test.SystemTextJson
             Console.WriteLine(ex6.ToString());
             Console.WriteLine("");
 
+            Console.WriteLine("--- Chain ---");
+            Expr eChain = new Expr("hello", OperatorEnum.Equals, "world")
+                .PrependAnd("id", OperatorEnum.GreaterThan, 0)
+                .PrependAnd("created", OperatorEnum.GreaterThan, DateTime.UtcNow);
+            Console.WriteLine(eChain.ToString());
+            string eChainJson = SerializationHelper.SerializeJson(eChain, true);
+            Console.WriteLine(eChainJson);
+            Console.WriteLine("");
+
             string userInput = null;
             while (true)
             {
