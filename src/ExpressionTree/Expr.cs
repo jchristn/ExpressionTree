@@ -90,8 +90,12 @@ namespace ExpressionTree
             string ret = "(";
 
             Type leftType = Left.GetType();
-            Type operType = Operator.GetType();
-            Type rightType = Right.GetType();
+            Type rightType = null;
+
+            if (Right != null)
+            {
+                rightType = Right.GetType();
+            }
 
             if (_LiteralTypes.Contains(leftType))
             {
@@ -139,6 +143,10 @@ namespace ExpressionTree
                     ret += " " + ((Expr)Right).ToString();
                 }
             }
+            else
+            {
+                ret += " (null)";
+            }
 
             ret += ")";
             return ret;
@@ -152,6 +160,9 @@ namespace ExpressionTree
         /// <param name="right">The right term of the expression; can either be an object for comparison or a nested expression.</param>
         public Expr PrependAnd(object left, OperatorEnum oper, object right)
         {
+            if (_RightRequired.Contains(oper) && right == null)
+                throw new ArgumentException("The specified operator '" + oper.ToString() + "' requires a term on the 'Right' property.");
+
             Expr e = new Expr(left, oper, right);
             return PrependAnd(e);
         }
@@ -181,6 +192,9 @@ namespace ExpressionTree
         /// <param name="right">The right term of the expression; can either be an object for comparison or a nested expression.</param>
         public Expr PrependOr(object left, OperatorEnum oper, object right)
         {
+            if (_RightRequired.Contains(oper) && right == null)
+                throw new ArgumentException("The specified operator '" + oper.ToString() + "' requires a term on the 'Right' property.");
+
             Expr e = new Expr(left, oper, right);
             return PrependOr(e);
         }

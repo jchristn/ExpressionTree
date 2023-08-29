@@ -18,9 +18,10 @@ This project was built to provide a simple class to represent an expression tree
 
 Refer to the custom serializers in the ```Test.NewtonsoftJson``` and ```Test.SystemTextJson``` projects.
 
-## New in v1.0.0
+## New in v1.0.x
 
 - Initial release
+- Strong naming
 
 ## Simple Example
 ```csharp

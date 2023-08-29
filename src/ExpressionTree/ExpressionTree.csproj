@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;netcoreapp3.1;net461;net48;net6.0;net7.0</TargetFrameworks>
-		<Version>1.0.0.4</Version>
-		<PackageReleaseNotes>Enable prepend chaining</PackageReleaseNotes>
+		<TargetFrameworks>netstandard2.1;net461;net48;net6.0;net7.0</TargetFrameworks>
+		<Version>1.0.2</Version>
+		<PackageReleaseNotes>Bugfix for ToString</PackageReleaseNotes>
 		<ApplicationIcon>Assets\icon.ico</ApplicationIcon>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -15,8 +15,12 @@
 		<RepositoryUrl>https://github.com/jchristn/ExpressionTree</RepositoryUrl>
 		<RepositoryType>github</RepositoryType>
 		<PackageTags>expression tree</PackageTags>
-		<PackageLicenseFile></PackageLicenseFile>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<DocumentationFile>ExpressionTree.xml</DocumentationFile>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>C:\Code\Misc\ExpressionTree\ExpressionTree.snk</AssemblyOriginatorKeyFile>
+		<Title>ExpressionTree</Title>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -43,6 +47,17 @@
 		<Content Include="LICENSE.md">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\LICENSE.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 	<ItemGroup>
