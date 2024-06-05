@@ -67,6 +67,15 @@ namespace Test.SystemTextJson
             Console.WriteLine(eChainJson);
             Console.WriteLine("");
 
+            Console.WriteLine("--- Copy ---");
+            Expr eCopy = eChain.Copy();
+            eCopy = eCopy.PrependAnd("hello", OperatorEnum.Equals, "world");
+            Console.WriteLine("Chain: " + eChain.ToString());
+            Console.WriteLine("Copy : " + eCopy.ToString());
+            string eCopyJson = SerializationHelper.SerializeJson(eCopy, true);
+            Console.WriteLine(eCopyJson);
+            Console.WriteLine("");
+
             string userInput = null;
             while (true)
             {

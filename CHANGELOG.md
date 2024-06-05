@@ -2,10 +2,13 @@
 
 ## Current Version
 
-v1.0.0
+v1.1.x
 
-- Initial release
+- `Copy` API
 
 ## Previous Versions
 
-Notes from previous versions will be placed here.
+v1.0.x
+
+- Initial release
+

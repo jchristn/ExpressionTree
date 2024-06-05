@@ -14,14 +14,13 @@ If you have any issues or feedback, please file an issue here in Github. We'd lo
 
 This project was built to provide a simple class to represent an expression tree (term-operator-term) with support for nested expressions, literals, arrays, and lists.
 
-## Deserialization from JSON
+## Serialization to and Deserialization from JSON
 
-Refer to the custom serializers in the ```Test.NewtonsoftJson``` and ```Test.SystemTextJson``` projects.
+Refer to the custom serializers in the `Test.NewtonsoftJson` and `Test.SystemTextJson` projects.
 
-## New in v1.0.x
+## New in v1.1.x
 
-- Initial release
-- Strong naming
+- `Copy` API
 
 ## Simple Example
 ```csharp
@@ -29,7 +28,6 @@ using ExpressionTree;
 
 Expr e = new Expr(5, OperatorEnum.GreaterThan, 1);
 ```
-
 ## Nested Example
 ```csharp
 Expr e = new Expr(
@@ -38,7 +36,10 @@ Expr e = new Expr(
 	new Expr("Name", OperatorEnum.In, new List<string> { "Smith", "Anderson", "Jones" })
 	);
 ```
-
+## Create a Copy
+```csharp
+Expr eCopy = e.Copy()
+```
 ## Version History
 
 Refer to CHANGELOG.md for version history.

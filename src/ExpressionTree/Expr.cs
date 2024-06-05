@@ -217,6 +217,15 @@ namespace ExpressionTree
         }
 
         /// <summary>
+        /// Create a copy of an expression.
+        /// </summary>
+        /// <returns>New instance.</returns>
+        public Expr Copy()
+        {
+            return new Expr(Left, Operator, Right);
+        }
+
+        /// <summary>
         /// Prepends the expression in prepend to the expression original using an AND clause.
         /// </summary>
         /// <param name="prepend">The expression to prepend.</param>

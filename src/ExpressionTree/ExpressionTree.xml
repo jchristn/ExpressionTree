@@ -94,6 +94,12 @@
             </summary>
             <param name="prepend">The expression to prepend.</param> 
         </member>
+        <member name="M:ExpressionTree.Expr.Copy">
+            <summary>
+            Create a copy of an expression.
+            </summary>
+            <returns>New instance.</returns>
+        </member>
         <member name="M:ExpressionTree.Expr.PrependAndClause(ExpressionTree.Expr,ExpressionTree.Expr)">
             <summary>
             Prepends the expression in prepend to the expression original using an AND clause.

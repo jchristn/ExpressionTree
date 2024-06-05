@@ -2,7 +2,7 @@
 using System.IO;
 using ExpressionTree;
 
-namespace Test.SystemTextJson
+namespace Test
 {
     internal class Program
     {
