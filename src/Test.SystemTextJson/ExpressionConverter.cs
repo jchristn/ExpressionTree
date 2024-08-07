@@ -158,7 +158,8 @@
 
             if (value.Left is Expr)
             {
-                Write(writer, (Expr)value.Left, options);
+                writer.WritePropertyName("Left");
+                JsonSerializer.Serialize(writer, value.Left, options);
             }
             else if (IsNumberType(value.Left))
             {
@@ -184,7 +185,8 @@
 
             if (value.Right is Expr)
             {
-                Write(writer, (Expr)value.Right, options);
+                writer.WritePropertyName("Right");
+                JsonSerializer.Serialize(writer, value.Right, options);
             }
             else if (IsNumberType(value.Right))
             {
