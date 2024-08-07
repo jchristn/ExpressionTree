@@ -63,7 +63,7 @@ namespace Test.SystemTextJson
                 .PrependAnd("id", OperatorEnum.GreaterThan, 0)
                 .PrependAnd("created", OperatorEnum.GreaterThan, DateTime.UtcNow);
             Console.WriteLine(eChain.ToString());
-            string eChainJson = SerializationHelper.SerializeJson(eChain, true);
+            string eChainJson = SerializationHelper.SerializeJson(eChain, false);
             Console.WriteLine(eChainJson);
             Console.WriteLine("");
 
@@ -72,7 +72,7 @@ namespace Test.SystemTextJson
             eCopy = eCopy.PrependAnd("hello", OperatorEnum.Equals, "world");
             Console.WriteLine("Chain: " + eChain.ToString());
             Console.WriteLine("Copy : " + eCopy.ToString());
-            string eCopyJson = SerializationHelper.SerializeJson(eCopy, true);
+            string eCopyJson = SerializationHelper.SerializeJson(eCopy, false);
             Console.WriteLine(eCopyJson);
             Console.WriteLine("");
 

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using ExpressionTree;
-
-namespace Test.SystemTextJson
+﻿namespace Test.SystemTextJson
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
+    using ExpressionTree;
+
     public class ExpressionConverter : JsonConverter<Expr>
     {
         // https://makolyte.com/system-text-json-how-to-customize-serialization-with-jsonconverter/
@@ -144,9 +144,81 @@ namespace Test.SystemTextJson
             return ret;
         }
 
+        /// <summary>
+        /// Write.
+        /// </summary>
+        /// <param name="writer">Writer.</param>
+        /// <param name="value">Value.</param>
+        /// <param name="options">Options.</param>
         public override void Write(Utf8JsonWriter writer, Expr value, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            if (value == null) throw new ArgumentNullException(nameof(value));
+
+            writer.WriteStartObject();
+
+            if (value.Left is Expr)
+            {
+                Write(writer, (Expr)value.Left, options);
+            }
+            else if (IsNumberType(value.Left))
+            {
+                writer.WriteNumber("Left", Convert.ToDecimal(value.Left));
+            }
+            else if (IsBooleanType(value.Left))
+            {
+                writer.WriteBoolean("Left", Convert.ToBoolean(value.Left));
+            }
+            else
+            {
+                if (value.Left != null)
+                {
+                    writer.WriteString("Left", value.Left.ToString());
+                }
+                else
+                {
+                    writer.WriteNull("Left");
+                }
+            }
+
+            writer.WriteString("Operator", value.Operator.ToString());
+
+            if (value.Right is Expr)
+            {
+                Write(writer, (Expr)value.Right, options);
+            }
+            else if (IsNumberType(value.Right))
+            {
+                writer.WriteNumber("Right", Convert.ToDecimal(value.Right));
+            }
+            else if (IsBooleanType(value.Right))
+            {
+                writer.WriteBoolean("Right", Convert.ToBoolean(value.Right));
+            }
+            else
+            {
+                if (value.Right != null)
+                {
+                    writer.WriteString("Right", value.Right.ToString());
+                }
+                else
+                {
+                    writer.WriteNull("Right");
+                }
+            }
+
+            writer.WriteEndObject();
+        }
+
+        private bool IsNumberType(object value)
+        {
+            if (value == null) return false;
+            return Double.TryParse(value.ToString(), out double _);
+        }
+
+        private bool IsBooleanType(object value)
+        {
+            if (value == null) return false;
+            return Boolean.TryParse(value.ToString(), out bool _);
         }
     }
 }
