@@ -19,6 +19,7 @@ namespace Test.NewtonsoftJson
                   Newtonsoft.Json.Formatting.Indented,
                   new JsonSerializerSettings
                   {
+                      Converters = DefaultConverters,
                       NullValueHandling = NullValueHandling.Ignore,
                       DateTimeZoneHandling = DateTimeZoneHandling.Utc
                   });
@@ -28,6 +29,7 @@ namespace Test.NewtonsoftJson
                 json = JsonConvert.SerializeObject(obj,
                   new JsonSerializerSettings
                   {
+                      Converters = DefaultConverters,
                       NullValueHandling = NullValueHandling.Ignore,
                       DateTimeZoneHandling = DateTimeZoneHandling.Utc
                   });
@@ -36,7 +38,7 @@ namespace Test.NewtonsoftJson
             return json;
         }
         
-        internal static JsonConverter[] DeserializationConverters = { new ExpressionConverter() };
+        internal static JsonConverter[] DefaultConverters = { new ExpressionConverter() };
 
         internal static T DeserializeJson<T>(string json)
         {
@@ -44,7 +46,7 @@ namespace Test.NewtonsoftJson
             return JsonConvert.DeserializeObject<T>(json, 
                 new JsonSerializerSettings
                 {
-                    Converters = DeserializationConverters,
+                    Converters = DefaultConverters,
                     TypeNameHandling = TypeNameHandling.All
                 });
         }

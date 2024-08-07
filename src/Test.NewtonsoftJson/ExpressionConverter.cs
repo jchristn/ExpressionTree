@@ -15,88 +15,121 @@ namespace Test.NewtonsoftJson
     {
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(Expr));
+            return objectType == typeof(Expr);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            // see https://blog.codeinside.eu/2015/03/30/json-dotnet-deserialize-to-abstract-class-or-interface/
+            JObject jObject = JObject.Load(reader);
+            Expr expr = new Expr();
 
-            Expr ret = new Expr();
+            expr.Left = ReadValue(jObject["Left"]);
+            expr.Operator = (OperatorEnum)Enum.Parse(typeof(OperatorEnum), (string)jObject["Operator"]);
+            expr.Right = ReadValue(jObject["Right"]);
 
-            JObject jo = JObject.Load(reader);
-
-            /*
-            Console.WriteLine("--- In Converter ---");
-            Console.WriteLine("Object   : " + jo.ToString());
-            Console.WriteLine("Left     : " + jo["Left"].ToString());
-            Console.WriteLine("Operator : " + jo["Operator"].ToString());
-            Console.WriteLine("Right    : " + jo["Right"].ToString());
-            */
-
-            if (jo["Left"] != null)
-            {
-                JToken leftToken = jo["Left"];
-                if (leftToken.Type == JTokenType.Object)
-                {
-                    // Console.WriteLine("Left: Object");
-                    ret.Left = SerializationHelper.DeserializeJson<Expr>(leftToken.ToString());
-                }
-                else if (leftToken.Type == JTokenType.Array)
-                {
-                    // Console.WriteLine("Left: Array");
-                    ret.Left = leftToken.ToObject<List<object>>();
-                }
-                else if (leftToken.Type == JTokenType.Integer)
-                {
-                    // Console.WriteLine("Left: Integer");
-                    ret.Left = leftToken.ToObject<decimal>();
-                }
-                else
-                {
-                    // Console.WriteLine("Left: Array");
-                    ret.Left = leftToken.ToObject<string>();
-                }
-            }
-
-            ret.Operator = (OperatorEnum)(Enum.Parse(typeof(OperatorEnum), jo["Operator"].ToString()));
-
-            if (jo["Right"] != null)
-            {
-                JToken rightToken = jo["Right"];
-                if (rightToken.Type == JTokenType.Object)
-                {
-                    // Console.WriteLine("Right: Object");
-                    ret.Right = SerializationHelper.DeserializeJson<Expr>(rightToken.ToString());
-                }
-                else if (rightToken.Type == JTokenType.Array)
-                {
-                    // Console.WriteLine("Right: Array");
-                    ret.Right = rightToken.ToObject<List<object>>();
-                }
-                else if (rightToken.Type == JTokenType.Integer)
-                {
-                    // Console.WriteLine("Right: Integer");
-                    ret.Right = rightToken.ToObject<decimal>();
-                }
-                else
-                {
-                    // Console.WriteLine("Right: String");
-                    ret.Right = rightToken.ToObject<string>();
-                }
-            }
-
-            return ret;
+            return expr;
         }
 
-        public override bool CanWrite
+        private object ReadValue(JToken token)
         {
-            get { return false; }
+            switch (token.Type)
+            {
+                case JTokenType.String:
+                    string strValue = token.Value<string>();
+                    // Try parsing as DateTime
+                    if (DateTime.TryParse(strValue, out DateTime dateTimeValue))
+                    {
+                        return dateTimeValue;
+                    }
+                    return strValue;
+                case JTokenType.Integer:
+                    return token.Value<long>();
+                case JTokenType.Float:
+                    return token.Value<double>();
+                case JTokenType.Boolean:
+                    return token.Value<bool>();
+                case JTokenType.Date:
+                    return token.Value<DateTime>();
+                case JTokenType.Null:
+                    return null;
+                case JTokenType.Object:
+                    return token.ToObject<Expr>(new JsonSerializer { Converters = { new ExpressionConverter() } });
+                case JTokenType.Array:
+                    List<object> list = new List<object>();
+                    foreach (var item in token.Children())
+                    {
+                        list.Add(ReadValue(item));
+                    }
+                    return list;
+                default:
+                    throw new JsonException($"Unexpected token type: {token.Type}");
+            }
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            Expr expr = (Expr)value;
+            writer.WriteStartObject();
+
+            writer.WritePropertyName("Left");
+            WriteValue(writer, expr.Left, serializer);
+
+            writer.WritePropertyName("Operator");
+            writer.WriteValue(expr.Operator.ToString());
+
+            writer.WritePropertyName("Right");
+            WriteValue(writer, expr.Right, serializer);
+
+            writer.WriteEndObject();
+        }
+
+        private void WriteValue(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            if (value == null)
+            {
+                writer.WriteNull();
+            }
+            else if (value is string str)
+            {
+                writer.WriteValue(str);
+            }
+            else if (value is long l)
+            {
+                writer.WriteValue(l);
+            }
+            else if (value is int i)
+            {
+                writer.WriteValue(i);
+            }
+            else if (value is double d)
+            {
+                writer.WriteValue(d);
+            }
+            else if (value is bool b)
+            {
+                writer.WriteValue(b);
+            }
+            else if (value is DateTime dt)
+            {
+                writer.WriteValue(dt);
+            }
+            else if (value is Expr expr)
+            {
+                serializer.Serialize(writer, expr);
+            }
+            else if (value is IEnumerable<object> list)
+            {
+                writer.WriteStartArray();
+                foreach (var item in list)
+                {
+                    WriteValue(writer, item, serializer);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                throw new JsonException($"Unexpected value type: {value.GetType()}");
+            }
         }
     }
 }
