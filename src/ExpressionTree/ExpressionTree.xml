@@ -21,6 +21,7 @@
         <member name="T:ExpressionTree.Expr">
             <summary>
             Expression.
+            A structure in the form of term-operator-term that defines a Boolean evaluation.
             </summary>
         </member>
         <member name="P:ExpressionTree.Expr.Left">
@@ -38,9 +39,20 @@
             Right term.
             </summary>
         </member>
+        <member name="P:ExpressionTree.Expr.LiteralTypes">
+            <summary>
+            Specify the types that, when encountered, should be treated as literal objects as opposed to being cast to Expr.
+            </summary>
+        </member>
+        <member name="P:ExpressionTree.Expr.RightRequired">
+            <summary>
+            Specify the operators that demand that a value be placed in the 'Right' property of the expression.
+            </summary>
+        </member>
         <member name="M:ExpressionTree.Expr.#ctor">
             <summary>
-            Instantiate.
+            Expression.
+            A structure in the form of term-operator-term that defines a Boolean evaluation.
             </summary>
         </member>
         <member name="M:ExpressionTree.Expr.#ctor(System.Object,ExpressionTree.OperatorEnum,System.Object)">
@@ -132,7 +144,7 @@
         </member>
         <member name="T:ExpressionTree.OperatorEnum">
             <summary>
-            Available conditions for search filters.
+            Boolean operators that can be used between left and right values.
             </summary>
         </member>
         <member name="F:ExpressionTree.OperatorEnum.Equals">

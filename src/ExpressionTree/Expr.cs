@@ -7,6 +7,7 @@ namespace ExpressionTree
 {
     /// <summary>
     /// Expression.
+    /// A structure in the form of term-operator-term that defines a Boolean evaluation.
     /// </summary>
     [Serializable]
     public class Expr
@@ -28,16 +29,88 @@ namespace ExpressionTree
         /// </summary>
         public object Right { get; set; } = null;
 
+        /// <summary>
+        /// Specify the types that, when encountered, should be treated as literal objects as opposed to being cast to Expr.
+        /// </summary>
+        public List<Type> LiteralTypes
+        {
+            get
+            {
+                return _LiteralTypes;
+            }
+            set
+            {
+                if (value == null) throw new ArgumentNullException(nameof(LiteralTypes));
+                _LiteralTypes = value;
+            }
+        }
+
+        /// <summary>
+        /// Specify the operators that demand that a value be placed in the 'Right' property of the expression.
+        /// </summary>
+        public List<OperatorEnum> RightRequired
+        {
+            get
+            {
+                return _RightRequired;
+            }
+            set
+            {
+                if (value == null) throw new ArgumentNullException(nameof(RightRequired));
+                _RightRequired = value;
+            }
+        }
+
         #endregion
 
         #region Private-Members
+
+        private List<OperatorEnum> _RightRequired = new List<OperatorEnum>
+        {
+            OperatorEnum.And,
+            OperatorEnum.Contains,
+            OperatorEnum.ContainsNot,
+            OperatorEnum.EndsWith,
+            OperatorEnum.Equals,
+            OperatorEnum.GreaterThan,
+            OperatorEnum.GreaterThanOrEqualTo,
+            OperatorEnum.In,
+            OperatorEnum.LessThan,
+            OperatorEnum.LessThanOrEqualTo,
+            OperatorEnum.NotEquals,
+            OperatorEnum.NotIn,
+            OperatorEnum.Or,
+            OperatorEnum.StartsWith
+        };
+
+        private List<Type> _LiteralTypes = new List<Type>
+        {
+            typeof(string),
+            typeof(bool),
+            typeof(bool?),
+            typeof(int),
+            typeof(int?),
+            typeof(DateTime),
+            typeof(DateTime?),
+            typeof(DateTimeOffset),
+            typeof(DateTimeOffset?),
+            typeof(decimal),
+            typeof(decimal?),
+            typeof(double),
+            typeof(double?),
+            typeof(long),
+            typeof(long?),
+            typeof(Guid),
+            typeof(Guid?)
+        };
 
         #endregion
 
         #region Constructors-and-Factories
 
         /// <summary>
-        /// Instantiate.
+        /// Expression.
+        /// A structure in the form of term-operator-term that defines a Boolean evaluation.
         /// </summary>
         public Expr()
         {
@@ -378,43 +451,6 @@ namespace ExpressionTree
         #endregion
 
         #region Private-Methods
-
-        private List<OperatorEnum> _RightRequired = new List<OperatorEnum>
-        {
-            OperatorEnum.And,
-            OperatorEnum.Contains,
-            OperatorEnum.ContainsNot,
-            OperatorEnum.EndsWith,
-            OperatorEnum.Equals,
-            OperatorEnum.GreaterThan,
-            OperatorEnum.GreaterThanOrEqualTo,
-            OperatorEnum.In,
-            OperatorEnum.LessThan,
-            OperatorEnum.LessThanOrEqualTo,
-            OperatorEnum.NotEquals,
-            OperatorEnum.NotIn,
-            OperatorEnum.Or,
-            OperatorEnum.StartsWith
-        };
-
-        private List<Type> _LiteralTypes = new List<Type>
-        {
-            typeof(string),
-            typeof(bool),
-            typeof(bool?),
-            typeof(int),
-            typeof(int?),
-            typeof(DateTime),
-            typeof(DateTime?),
-            typeof(DateTimeOffset),
-            typeof(DateTimeOffset?),
-            typeof(decimal),
-            typeof(decimal?),
-            typeof(double),
-            typeof(double?),
-            typeof(long),
-            typeof(long?)
-        };
 
         #endregion
     }

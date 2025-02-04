@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace ExpressionTree
 {
     /// <summary>
-    /// Available conditions for search filters.
+    /// Boolean operators that can be used between left and right values.
     /// </summary>
     public enum OperatorEnum
     {

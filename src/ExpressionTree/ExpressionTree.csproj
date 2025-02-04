@@ -2,20 +2,20 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net461;net48;net6.0;net8.0</TargetFrameworks>
-		<Version>1.1.1</Version>
+		<Version>1.1.2</Version>
 		<PackageReleaseNotes>Add Copy API</PackageReleaseNotes>
 		<ApplicationIcon>Assets\icon.ico</ApplicationIcon>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Authors>Joel Christner</Authors>
 		<Description>A simple library for creating an expression tree.</Description>
-		<Copyright>(c)2024 Joel Christner</Copyright>
+		<Copyright>(c)2025 Joel Christner</Copyright>
 		<PackageProjectUrl>https://github.com/jchristn/ExpressionTree</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/jchristn/ExpressionTree</RepositoryUrl>
 		<RepositoryType>github</RepositoryType>
 		<PackageTags>expression tree</PackageTags>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<DocumentationFile>ExpressionTree.xml</DocumentationFile>
 		<Title>ExpressionTree</Title>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -41,27 +41,21 @@
 		<Content Include="ExpressionTree.xml">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
 		<Content Include="LICENSE.md">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\LICENSE.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Include="..\..\README.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="Assets\icon.ico">
+		<None Include="..\..\LICENSE.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="Assets\icon.ico">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
