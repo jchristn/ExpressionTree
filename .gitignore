@@ -339,3 +339,5 @@ paket-files/
 __pycache__/
 *.pyc
  
+# Touchstone CLI runner JSON export
+results.json

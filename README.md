@@ -18,6 +18,17 @@ This project was built to provide a simple class to represent an expression tree
 
 Refer to the custom serializers in the `Test.NewtonsoftJson` and `Test.SystemTextJson` projects.
 
+## Testing
+
+The library is validated by a [Touchstone](https://www.nuget.org/packages/Touchstone)-based test suite. Test cases are defined once as runner-agnostic descriptors and executed through multiple hosts:
+
+- `Test.Shared` &mdash; central source of truth; all test-case descriptors live here (`Touchstone.Core`).
+- `Test.Automated` &mdash; Touchstone CLI runner (`Touchstone.Cli`). Run with `dotnet run --project src/Test.Automated`.
+- `Test.Xunit` &mdash; xUnit adapter (`Touchstone.XunitAdapter`). Run with `dotnet test src/Test.Xunit`.
+- `Test.Nunit` &mdash; NUnit adapter (`Touchstone.NunitAdapter`). Run with `dotnet test src/Test.Nunit`.
+
+The `Test`, `Test.NewtonsoftJson`, and `Test.SystemTextJson` projects remain as interactive console applications for exploring the library by hand.
+
 ## New in v1.1.x
 
 - `Copy` API
