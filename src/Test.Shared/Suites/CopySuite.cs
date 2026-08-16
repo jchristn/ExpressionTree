@@ -50,6 +50,19 @@ namespace Test.Shared.Suites
                 Check.Equal(original.ToString(), copy.ToString());
             }));
 
+            // Copy is a shallow copy: it re-uses the same nested child references rather than
+            // cloning them recursively. Mutating a scalar on the copy is isolated (see above), but
+            // the nested Expr instances themselves are shared with the original.
+            cases.Add(Case(Id, "copy_is_shallow_shares_children", "Copy is shallow: nested child expressions are shared with the original", () =>
+            {
+                Expr child = new Expr("id", OperatorEnum.Equals, 1);
+                Expr original = new Expr(child, OperatorEnum.And, new Expr("active", OperatorEnum.Equals, true));
+                Expr copy = original.Copy();
+                Check.NotSame(original, copy);
+                Check.Same(original.Left, copy.Left);
+                Check.Same(original.Right, copy.Right);
+            }));
+
             // Copy is implemented as new Expr(Left, Operator, Right); a default Expr has a null Left,
             // so copying it surfaces the constructor's null-left guard.
             cases.Add(Case(Id, "copy_of_default_throws", "Copy of a default (null-left) expression throws ArgumentNullException", () =>

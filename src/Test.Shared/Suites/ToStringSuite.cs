@@ -141,6 +141,22 @@ namespace Test.Shared.Suites
                 Check.Equal("(created GreaterThan " + dto.ToString() + ")", e.ToString());
             }));
 
+            // --- Negative / edge ---
+            // A term that is neither a configured literal type, an array/list, nor a nested Expr is
+            // cast to Expr during rendering, which fails. float is intentionally absent from the
+            // default LiteralTypes set, so this documents the current rendering contract.
+            cases.Add(Case(Id, "non_literal_right_throws", "ToString throws for a right term that is neither a literal type, a collection, nor an Expr", () =>
+            {
+                Expr e = new Expr("ratio", OperatorEnum.Equals, 1.5f);
+                Check.Throws<InvalidCastException>(() => e.ToString());
+            }));
+
+            cases.Add(Case(Id, "non_literal_left_throws", "ToString throws for a left term that is neither a literal type, a collection, nor an Expr", () =>
+            {
+                Expr e = new Expr(1.5f, OperatorEnum.Equals, 1);
+                Check.Throws<InvalidCastException>(() => e.ToString());
+            }));
+
             return new TestSuiteDescriptor(Id, "Expr.ToString rendering", cases);
         }
     }

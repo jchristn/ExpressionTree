@@ -84,6 +84,13 @@ namespace Test.Shared.Suites
                 Check.Equal("((lastlogin IsNull (null)) And (id GreaterThan 0))", e.ToString());
             }));
 
+            cases.Add(Case(Id, "or_allows_null_right_for_optional_operator", "PrependOr allows null Right for a right-optional operator", () =>
+            {
+                Expr e = new Expr("id", OperatorEnum.GreaterThan, 0);
+                e.PrependOr("lastlogin", OperatorEnum.IsNull, null);
+                Check.Equal("((lastlogin IsNull (null)) Or (id GreaterThan 0))", e.ToString());
+            }));
+
             // --- Negative ---
             cases.Add(Case(Id, "and_null_expression_throws", "PrependAnd(null Expr) throws ArgumentNullException", () =>
             {
